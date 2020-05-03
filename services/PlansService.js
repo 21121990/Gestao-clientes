@@ -5,12 +5,44 @@ class PlansService {
     constructor() {
         this.Plan = Database["Plan"];
     }
-   async getAll() {
+    async getAll() {
         try {
             return await this.Plan.findAll();
         } catch (error) {
             console.log(error);
         }
+    }
+    async getOne(id) {
+        try {
+            return await this.Plan.findOne({ where: { id: id } });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async update(plan) {
+
+        var errors = {};
+        var isValid = this.Validate(plan, errors);
+
+        if (isValid) {
+            try {
+                await this.Plan.update({
+                    title: plan.title,
+                    list: plan.list,
+                    client: plan.client,
+                    value: plan.value,
+                    import: plan.import
+                }, { where: { id: plan.id } })
+                return true;
+            } catch (error) {
+                errors.system_msg = "Não foi possível alterar o plano";
+                return errors;
+            }
+
+        } else {
+            return errors;
+        }
+
     }
 
     async store(plans) {
@@ -20,7 +52,7 @@ class PlansService {
         } else {
             plans.import = false;
         }
-        var isValid = this.Validate(plans, errors);
+        var isValid =  this.Validate(plans, errors);
 
         if (isValid) {
             try {

@@ -11,6 +11,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>preço</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,16 @@
                     <td><%=plan.id %></td>
                     <td><%=plan.title %></td>
                     <td>R$ <%=plan.value %></td>
+
+                    <td>
+                        <a href="/admin/plans/edit/<%= plan.id %>" class="btn btn-primary">Editar</a>
+                        <form onsubmit="confirmarDelecao(event, this)" method="POST" action="/plans/delete"
+                            style="display: inline;">
+                            <input type="hidden" name="id" value="<%= plan.id %>">
+                            <button class="btn btn-primary">Deletar</button>
+                        </form>
+                    </td>
+
                 </tr>
                 <% } ) %>
             </tbody>
@@ -28,3 +39,13 @@
 </body>
 
 <%- include ("../partials/footer.ejs") %>
+
+<script>
+    function confirmarDelecao(event, form) {
+        event.preventDefault();
+        var decision = confirm("Você deseja realmente exlcuir?");
+        if (decision) {
+            form.submit();
+        }
+    }
+</script>

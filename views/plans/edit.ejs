@@ -1,0 +1,51 @@
+<%- include ("../partials/header.ejs") %>
+<%- include ("../partials/homenavbar.ejs") %>
+
+<body>
+    <div class="container">
+        <h2 class="mt-5">Edição de planos</h2>
+        <hr>
+        <form action="/plans/update" method="POST">
+            <div class="card">
+
+                <div class="card-header">
+                    <h4>Editar plano</h4>
+                </div>
+
+                <div class="card-body">
+                    <input type="hidden" name="id" value="<%=Plan.id %>">
+                    <input type="text" name="title" id="title" value="<%=Plan.title%>" class="form-control"
+                        placeholder="Título do plano"><br>
+                    <% if(title_msg.length > 0) { %>
+                    <div class="alert alert-danger"><%= title_msg %></div>
+                    <br>
+                    <% } %>
+                    <input type="number" name="list" id="list" value="<%=Plan.list%>" placeholder="N* de listas"
+                        class="form-control"><br>
+
+                    <% if(list_msg.length > 0) { %>
+                    <div class="alert alert-danger"><%= list_msg %></div>
+                    <br>
+                    <% } %>
+
+                    <input type="number" name="client" id="client" value="<%=Plan.client%>" placeholder="N* de clientes"
+                        class="form-control"><br>
+                    <input type="number" name="value" id="value" placeholder="Custo" value="<%=Plan.value%>"
+                        class="form-control"><br>
+                    <hr>
+                    <% if(Plan.import == true) {%>
+                    Permite importação de lista: <input type="checkbox" checked="true" name="import" id="import">
+                    <%}else { %>
+                    Permite importação de lista: <input type="checkbox"  name="import" id="import">
+                    <%}%>
+                </div>
+
+                <div class="card-footer">
+                    <button class="btn btn-success btn-block">Alterar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+<%- include ("../partials/footer.ejs") %>
