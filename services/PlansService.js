@@ -19,6 +19,13 @@ class PlansService {
             console.log(error);
         }
     }
+    async delete(id){
+        try {
+            this.Plan.destroy({where: {id:id}})
+        } catch (error) {
+            return error
+        }
+    }
     async update(plan) {
 
         var errors = {};

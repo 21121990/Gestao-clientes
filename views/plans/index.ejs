@@ -23,9 +23,9 @@
 
                     <td>
                         <a href="/admin/plans/edit/<%= plan.id %>" class="btn btn-primary">Editar</a>
-                        <form onsubmit="confirmarDelecao(event, this)" method="POST" action="/plans/delete"
+                        <form onsubmit="confirmarDelecao(event, this)" method="POST" action="/plans/delete/<%=plan.id%>"
                             style="display: inline;">
-                            <input type="hidden" name="id" value="<%= plan.id %>">
+                            <input type="hidden" name="id" >
                             <button class="btn btn-primary">Deletar</button>
                         </form>
                     </td>

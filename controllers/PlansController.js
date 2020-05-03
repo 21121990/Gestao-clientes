@@ -11,6 +11,11 @@ class PlansController {
         var Plan = await PlansService.getOne(id);
         res.render("plans/edit", { Plan: Plan, title_msg: req.flash('title_msg'), list_msg: req.flash('list_msg') });
     }
+    async delete(req,res){
+        var id = req.params.id;
+        await PlansService.delete(id);
+        res.redirect("/admin/plans/");
+    }
 
     async update(req, res) {
         var plan = {};
