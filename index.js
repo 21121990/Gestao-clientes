@@ -28,9 +28,7 @@ app.use(bodyParser.json());
 // Router
 app.use(("/"), PlansRouter);
 
-app.get("/", (req, res) => {
-    res.render("index.ejs");
-})
+
 
 // End Router
 app.listen(3000, () => {

@@ -5,6 +5,13 @@ class PlansService {
     constructor() {
         this.Plan = Database["Plan"];
     }
+   async getAll() {
+        try {
+            return await this.Plan.findAll();
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     async store(plans) {
         var errors = {};
